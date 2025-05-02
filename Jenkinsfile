@@ -1,10 +1,14 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'docker:latest'  // Usamos la imagen oficial de Docker
+            args '-v /var/run/docker.sock:/var/run/docker.sock'  // Permite el acceso al Docker del host
+        }
+    }
 
     stages {
         stage('Checkout') {
             steps {
-                // Obtener el código del repositorio
                 git branch: 'main', url: 'https://github.com/CamiloMendez23/ProyectoSIS312.git'
             }
         }
@@ -17,7 +21,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Run Docker Container') {
             steps {
                 script {
@@ -26,7 +30,7 @@ pipeline {
                 }
             }
         }
-        
+
         stage('Clean Up') {
             steps {
                 script {

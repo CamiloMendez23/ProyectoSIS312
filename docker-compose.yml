@@ -2,10 +2,12 @@ version: '3'
 services:
   jenkins:
     image: jenkins/jenkins:lts
+    container_name: jenkins
     ports:
-      - "8080:8080"
+      - "8080:8080"          # Jenkins estará accesible en http://localhost:8080
+      - "50000:50000"        # Puerto para conexiones de agentes Jenkins
     volumes:
-      - jenkins_home:/var/jenkins_home
-
+      - jenkins_home:/var/jenkins_home  # Volumen persistente para los datos de Jenkins
+      - /var/run/docker.sock:/var/run/docker.sock  # Permite que Jenkins ejecute Docker
 volumes:
-  jenkins_home:
+  jenkins_home:  # Definir un volumen persistente para Jenkins
