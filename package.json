@@ -1,0 +1,15 @@
+{
+  "name": "proyecto-sis312",
+  "version": "1.0.0",
+  "description": "Frontend para SIS312",
+  "scripts": {
+    "lint": "eslint frontend/js/*.js",
+    "build": "mkdir dist 2> nul && xcopy /E /I /Y frontend dist"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0"
+  },
+  "dependencies": {
+    "proyecto-sis312": "file:"
+  }
+}
