@@ -12,6 +12,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'
+                sh 'chmod -R +x node_modules/.bin/*' // Add executable permissions
             }
         }
         stage('Test') {
@@ -28,7 +29,7 @@ pipeline {
             steps {
                 sh 'nohup npm start &'
                 sh 'sleep 5'
-                sh 'curl -f http://host.docker.internal:8000 || echo "Deployment check failed"'
+                sh 'curl -f http://localhost:8000 || exit 1' // Fail pipeline if curl fails
             }
         }
     }
