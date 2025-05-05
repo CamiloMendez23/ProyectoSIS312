@@ -1,2 +1,39 @@
-/* Este archivo contiene los estilos principales para la página */
-body { font-family: Arial, sans-serif; margin: 20px; } h1 { color: #dd1f1f; }
+/* Estilos mejorados para una bienvenida más atractiva */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f9;
+  color: #333;
+  text-align: center;
+}
+
+header {
+  background-color: #6200ea;
+  color: white;
+  padding: 20px 0;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2.5em;
+}
+
+main {
+  padding: 20px;
+}
+
+button {
+  background-color: #6200ea;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+button:hover {
+  background-color: #3700b3;
+}
