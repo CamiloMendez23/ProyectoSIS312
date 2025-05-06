@@ -15,10 +15,17 @@ pipeline {
             }
         }
 
-        stage('Instalar servidor') {
+        stage('Copiar frontend a carpeta compartida') {
             steps {
-                echo 'Iniciando servidor web local con Docker'
-                sh 'docker run -d -p 8081:80 -v $PWD:/usr/share/nginx/html:ro nginx'
+                echo 'Copiando archivos del frontend a carpeta compartida'
+                sh 'cp -r * /nginx_output/'
+            }
+        }
+
+        stage('Levantar servidor Nginx') {
+            steps {
+                echo 'Iniciando servidor Nginx'
+                sh 'docker run -d -p 8082:80 -v C:/nginx_html:/usr/share/nginx/html:ro nginx'
             }
         }
     }

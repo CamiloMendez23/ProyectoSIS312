@@ -11,6 +11,7 @@ services:
     volumes:
       - jenkins_home:/var/jenkins_home
       - /var/run/docker.sock:/var/run/docker.sock
+      - C:/nginx_html:/nginx_output    # <--- Carpeta compartida real
     networks:
       - jenkins
 
