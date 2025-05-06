@@ -1,17 +1,23 @@
+version: '3.8'
+
 services:
   jenkins:
-    image: jenkins/jenkins:lts
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: jenkins
     ports:
       - "8080:8080"
       - "50000:50000"
-      - "8000:8000" # Required for http-server
+      - "8000:8000"
     volumes:
       - jenkins_home:/var/jenkins_home
     networks:
       - jenkins
+
 networks:
   jenkins:
     driver: bridge
+
 volumes:
   jenkins_home:
