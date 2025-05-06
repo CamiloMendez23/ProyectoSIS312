@@ -18,7 +18,7 @@ pipeline {
         stage('Instalar servidor') {
             steps {
                 echo 'Iniciando servidor web local con Docker'
-                sh 'docker run -d -p 8081:80 -v $WORKSPACE:/usr/share/nginx/html:ro nginx'
+                sh 'docker run -d -p 8081:80 -v $PWD:/usr/share/nginx/html:ro nginx'
             }
         }
     }
