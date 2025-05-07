@@ -1,0 +1,44 @@
+pipeline {
+    agent any
+
+    environment {
+        // Definir las variables de entorno necesarias
+        NODE_ENV = 'production'
+    }
+
+    stages {
+        stage('Install Dependencies') {
+            steps {
+                script {
+                    // Instalar las dependencias de Node.js
+                    sh 'npm install'
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                script {
+                    // Ejecutar el build de producción
+                    sh 'npm run build'
+                }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                script {
+                    // Aquí puedes añadir la lógica de despliegue, si la tienes
+                    echo 'Deploying to server...'
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            // Limpiar los archivos temporales si es necesario
+            cleanWs()
+        }
+    }
+}
