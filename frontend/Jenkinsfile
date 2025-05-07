@@ -9,8 +9,10 @@ pipeline {
     stages {
         stage('Clonar Repositorio') {
             steps {
-               git 'https://Serghio07:<tu_token>@github.com/CamiloMendez23/ProyectoSIS312.git'
-  // Clona el repositorio de GitHub
+                script {
+                    // Usamos las credenciales almacenadas en Jenkins
+                    git credentialsId: 'github-token', url: 'https://github.com/CamiloMendez23/ProyectoSIS312.git'
+                }
             }
         }
         
