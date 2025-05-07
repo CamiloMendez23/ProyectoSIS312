@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    user: root
+    restart: unless-stopped
+    networks:
+      - jenkins_net  # Asegúrate de que esto coincida con la red definida más abajo
+    environment:
+      - DOCKER_HOST=unix:///var/run/docker.sock
+
+  # Si tienes otros servicios en el archivo, defínelos aquí también
+
+volumes:
+  jenkins_home:
+
+networks:
+  jenkins_net:  # Definir la red aquí
+    driver: bridge  # O puedes dejarlo por defecto si no es necesario

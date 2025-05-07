@@ -1,16 +1,21 @@
 pipeline {
     agent any
-
-    environment {
-        // Definir las variables de entorno necesarias
-        NODE_ENV = 'production'
+    tools {
+        nodejs 'Node_18'  // Aquí se define la versión de Node.js, similar a como se define Maven
     }
 
     stages {
-        stage('Install Dependencies') {
+        stage('Clonar Repositorio') {
             steps {
-                script {
-                    // Instalar las dependencias de Node.js
+                git branch: 'main', url: 'https://github.com/CamiloMendez23/ProyectoSIS312.git'
+            }
+        }
+
+
+        stage('Instalar Dependencias') {
+            steps {
+                // Asegurarse de estar en la carpeta donde está el package.json y ejecutar npm install
+                dir('frontend') {
                     sh 'npm install'
                 }
             }
@@ -18,8 +23,8 @@ pipeline {
 
         stage('Build') {
             steps {
-                script {
-                    // Ejecutar el build de producción
+                // Ejecutar el build de producción
+                dir('frontend') {
                     sh 'npm run build'
                 }
             }
@@ -27,18 +32,16 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                script {
-                    // Aquí puedes añadir la lógica de despliegue, si la tienes
-                    echo 'Deploying to server...'
-                }
+                // Aquí podrías agregar un paso para desplegar, como subir el build a un servidor o contenedor
+                echo 'Desplegando la aplicación...'
+                // Este paso depende de tu estrategia de despliegue
             }
         }
     }
 
     post {
         always {
-            // Limpiar los archivos temporales si es necesario
-            cleanWs()
+            cleanWs()  // Limpiar el workspace siempre que termine el pipeline
         }
     }
 }
